@@ -28,5 +28,9 @@ response = response.json()
 emotions = get_emotions(response)
 emotion = max(emotions, key=lambda key: emotions[key])
 
+with open('emojis.json') as emoji_map_json:
+    emoji_map = json.load(emoji_map_json)
+
 print(emotions)
 print(emotion)
+print(emoji_map[emotion])
