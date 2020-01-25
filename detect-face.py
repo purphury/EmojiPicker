@@ -22,7 +22,11 @@ params = {
 response = requests.post(face_api_url, params=params, headers=headers, json={"url": image_url})
 
 def get_emotions(faces):
-    return [face['faceAttributes']['emotion'] for face in faces]
+    return [face['faceAttributes']['emotion'] for face in faces][0]
 
 response = response.json()
-print(get_emotions(response))
+emotions = get_emotions(response)
+emotion = max(emotions, key=lambda key: emotions[key])
+
+print(emotions)
+print(emotion)
