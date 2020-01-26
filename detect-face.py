@@ -30,6 +30,11 @@ def get_emotions(faces):
 
 response = response.json()
 emotions = get_emotions(response)
+
+# Fix to not default to neutral
+if emotions['neutral'] < 0.85:
+    del emotions['neutral']
+
 emotion = max(emotions, key=lambda key: emotions[key])
 
 with open('emojis.json') as emoji_map_json:
