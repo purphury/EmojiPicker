@@ -93,7 +93,10 @@ def get_face_count():
 
     response = response.json()
     face_count = len(response)
+    print(response)
+
+    return face_count
 
 if __name__=='__main__':
-    find_emoji()
+    get_face_count()
  
