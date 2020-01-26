@@ -19,13 +19,13 @@ KEY = '7f8b21a0a50b4be99dc9079287cf5679'
 
 # Set the FACE_ENDPOINT environment variable with the endpoint from your Face service in Azure.
 # This endpoint will be used in all examples in this quickstart.
-ENDPOINT = 'https://westcentralus.api.cognitive.microsoft.com/' #'https://garrett.cognitiveservices.azure.com/'
+ENDPOINT = 'https://westcentralus.api.cognitive.microsoft.com/'
 
 # Create an authenticated FaceClient.
 face_client = FaceClient(ENDPOINT, CognitiveServicesCredentials(KEY))
 
 # Detect a face in an image that contains a single face
-single_face_image_url = 'https://www.biography.com/.image/t_share/MTQ1MzAyNzYzOTgxNTE0NTEz/john-f-kennedy---mini-biography.jpg'
+single_face_image_url = 'https://upload.wikimedia.org/wikipedia/commons/6/69/Face_of_SpooSpa.jpg'
 single_image_name = os.path.basename(single_face_image_url)
 detected_faces = face_client.face.detect_with_url(url=single_face_image_url)
 if not detected_faces:
