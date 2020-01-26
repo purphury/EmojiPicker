@@ -3,3 +3,4 @@ cred
 CLASSIFY_ME.jpg
 .DS_Store
 __pycache__
+env.sh
