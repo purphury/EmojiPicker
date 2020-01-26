@@ -9,6 +9,11 @@ from google.cloud.speech import types
 import pyaudio
 from six.moves import queue
 
+from video_parse import video_parse
+from video_parse import parse_single_image
+from video_parse import find_emoji
+from video_parse import get_face_count
+
 # Audio recording parameters
 RATE = 16000
 CHUNK = int(RATE / 10)  # 100ms
@@ -96,12 +101,17 @@ def listen_print_loop(responses):
     """
     num_chars_printed = 0
     for response in responses:
+
         if not response.results:
             continue
 
         # The `results` list is consecutive. For streaming, we only care about
         # the first result being considered, since once it's `is_final`, it
         # moves on to considering the next utterance.
+        
+        #if get_face_count() != 1:
+            #break
+        
         result = response.results[0]
         if not result.alternatives:
             continue
@@ -121,20 +131,25 @@ def listen_print_loop(responses):
             sys.stdout.flush()
 
             num_chars_printed = len(transcript)
-
         else:
-            print(transcript + overwrite_chars)
+            message = transcript + overwrite_chars
+            print(message, end=' ')
+            
 
             # Exit recognition if any of the transcribed phrases could be
             # one of our keywords.
-            if re.search(r'\b(exit|quit)\b', transcript, re.I):
-                print('Exiting..')
-                break
+            #if re.search(r'\b(exit|quit)\b', transcript, re.I):
+                #print('Exiting..')
+                #break
+            parse_single_image()
+            find_emoji()
+            break
 
             num_chars_printed = 0
 
 
 def main():
+    
     # See http://g.co/cloud/speech/docs/languages
     # for a list of supported languages.
     language_code = 'en-US'  # a BCP-47 language tag
@@ -153,11 +168,17 @@ def main():
         requests = (types.StreamingRecognizeRequest(audio_content=content)
                     for content in audio_generator)
 
+        
         responses = client.streaming_recognize(streaming_config, requests)
-
+        
         # Now, put the transcription responses to use.
         listen_print_loop(responses)
-
+        
+            
+            
 
 if __name__ == '__main__':
+#    print(get_face_count())
+#    video_parse()
     main()
+
