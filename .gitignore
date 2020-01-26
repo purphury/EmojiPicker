@@ -1,4 +1,5 @@
-CLASSIFY_ME.jpg
 cred
 .env
 CLASSIFY_ME.jpg
+.DS_Store
+__pycache__
