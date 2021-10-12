@@ -9,7 +9,7 @@ isodate==0.6.0
 msrest==0.6.10
 numpy==1.18.1
 oauthlib==3.1.0
-opencv-contrib-python==4.1.2.30
+opencv-contrib-python==4.2.0.32
 Pillow==7.0.0
 python-dotenv==0.10.5
 requests==2.22.0
